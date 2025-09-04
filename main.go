@@ -2,10 +2,14 @@ package main
 
 import (
 	"bufio"
+	"context"
 	"flag"
 	"fmt"
 	"net"
 	"os"
+	"os/signal"
+	"sync"
+	"syscall"
 )
 
 func main() {
@@ -41,27 +45,73 @@ func runServer() {
 	}
 	defer ln.Close()
 
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	var wg sync.WaitGroup
+
+	// Handle shutdown signals
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		<-sigChan
+		fmt.Fprintf(os.Stderr, "Shutting down server...\n")
+		cancel()
+		ln.Close()
+	}()
+
 	for {
+		select {
+		case <-ctx.Done():
+			fmt.Fprintf(os.Stderr, "Stopping to accept new connections\n")
+			goto waitForConnections
+		default:
+		}
+
 		conn, err := ln.Accept()
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error accepting connection: %v\n", err)
+			select {
+			case <-ctx.Done():
+				fmt.Fprintf(os.Stderr, "Listener closed\n")
+			default:
+				fmt.Fprintf(os.Stderr, "Error accepting connection: %v\n", err)
+			}
 			continue
 		}
-		go handleConnection(conn)
+		wg.Add(1)
+		go handleConnection(conn, &wg, ctx)
 	}
+
+waitForConnections:
+	wg.Wait()
+	fmt.Fprintf(os.Stderr, "All connections closed. Server shutdown complete.\n")
 }
 
-func handleConnection(conn net.Conn) {
+func handleConnection(conn net.Conn, wg *sync.WaitGroup, ctx context.Context) {
+	defer wg.Done()
 	defer conn.Close()
-	scanner := bufio.NewScanner(conn)
-	for scanner.Scan() {
-		msg := scanner.Text()
-		fmt.Fprintf(os.Stderr, "Received: %s\n", msg)
-		// Echo back for simplicity
-		fmt.Fprintf(conn, "Echo: %s\n", msg)
-	}
-	if err := scanner.Err(); err != nil {
-		fmt.Fprintf(os.Stderr, "Error reading from connection: %v\n", err)
+
+	done := make(chan struct{})
+	go func() {
+		defer close(done)
+		scanner := bufio.NewScanner(conn)
+		for scanner.Scan() {
+			msg := scanner.Text()
+			fmt.Fprintf(os.Stderr, "Received: %s\n", msg)
+			// Echo back for simplicity
+			fmt.Fprintf(conn, "Echo: %s\n", msg)
+		}
+		if err := scanner.Err(); err != nil {
+			fmt.Fprintf(os.Stderr, "Error reading from connection: %v\n", err)
+		}
+	}()
+
+	select {
+	case <-ctx.Done():
+		fmt.Fprintf(os.Stderr, "Shutting down connection\n")
+		conn.Close() // This will cause scanner.Scan() to return
+	case <-done:
+		// Connection closed naturally
 	}
 }
 
