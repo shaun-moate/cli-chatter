@@ -1,4 +1,4 @@
-# Task: cli-chatter-007 - Implement message sending and broadcasting
+# Task: cli-chatter-008 - Implement message sending and broadcasting
 
 **User Story**: As a user, I want to send messages to channels so others can see them.
 

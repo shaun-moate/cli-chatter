@@ -1,4 +1,4 @@
-# Task: cli-chatter-004 - Implement user authentication (username)
+# Task: cli-chatter-005 - Implement user authentication (username)
 
 **User Story**: As a user, I want to set a username on connect so I'm identified in the chat.
 

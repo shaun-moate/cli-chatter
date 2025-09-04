@@ -1,4 +1,4 @@
-# Task: cli-chatter-012 - Add command usage tracking
+# Task: cli-chatter-013 - Add command usage tracking
 
 **User Story**: As a product manager, I want command usage tracked so I can measure adoption.
 

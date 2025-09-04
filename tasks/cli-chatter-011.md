@@ -1,4 +1,4 @@
-# Task: cli-chatter-010 - Add file-based persistence for messages
+# Task: cli-chatter-011 - Add file-based persistence for messages
 
 **User Story**: As a system, I want to persist messages to file so history survives restarts.
 

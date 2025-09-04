@@ -1,4 +1,4 @@
-# Task: cli-chatter-003 - Implement client connection logic
+# Task: cli-chatter-004 - Implement client connection logic
 
 **User Story**: As a user, I want to connect to the chat server so I can participate in chats.
 

@@ -1,4 +1,4 @@
-# Task: cli-chatter-009 - Implement message history
+# Task: cli-chatter-010 - Implement message history
 
 **User Story**: As a user, I want to see message history when joining so I can catch up on conversations.
 

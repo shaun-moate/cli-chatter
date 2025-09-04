@@ -1,4 +1,4 @@
-# Task: cli-chatter-006 - Implement /join command
+# Task: cli-chatter-008 - Implement /join command
 
 **User Story**: As a user, I want to join channels using /join so I can participate in group chats.
 

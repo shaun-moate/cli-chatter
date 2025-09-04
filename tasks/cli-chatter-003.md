@@ -1,4 +1,4 @@
-# Task: cli-chatter-002 - Implement TCP server for handling connections
+# Task: cli-chatter-003 - Implement TCP server for handling connections
 
 **User Story**: As a server, I want to accept TCP connections from clients so users can join the chat.
 

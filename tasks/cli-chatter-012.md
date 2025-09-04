@@ -1,4 +1,4 @@
-# Task: cli-chatter-011 - Add error logging to stderr
+# Task: cli-chatter-012 - Add error logging to stderr
 
 **User Story**: As a developer, I want errors logged to stderr so I can debug issues.
 

@@ -1,4 +1,4 @@
-# Task: cli-chatter-008 - Implement /msg command for private messages
+# Task: cli-chatter-009 - Implement /msg command for private messages
 
 **User Story**: As a user, I want to send private messages using /msg so I can communicate one-on-one.
 
