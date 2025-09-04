@@ -1,22 +1,22 @@
-# Task: cli-chatter-007 - Implement message sending and broadcasting
+# Task: cli-chatter-006 - Implement /join command
 
-**User Story**: As a user, I want to send messages to channels so others can see them.
+**User Story**: As a user, I want to join channels using /join so I can participate in group chats.
 
 **Acceptance Criteria**:
-- Given joined channel, When I type message, Then it's sent to all in channel.
-- Given message sent, When received, Then displayed with username and timestamp.
-- Given private message, When /msg user message, Then sent only to that user.
+- Given connected, When I type /join #channel, Then I join the channel.
+- Given not joined, When I send message, Then it's to current channel.
+- Given invalid channel, When /join invalid, Then error message.
 
 **Dependencies / Assumptions / Risks**:
-- Dependencies: Tasks 004, 005, 006.
-- Assumptions: Real-time via polling or goroutines.
-- Risks: Message loss if connection drops.
+- Dependencies: Tasks 003, 005.
+- Assumptions: Channels created on join if not exist.
+- Risks: None.
 
 **Test Notes & Observability Hooks**:
-- Test: Send message, check all clients receive.
-- Observability: Log messages sent.
+- Test: Type /join, check joined.
+- Observability: Log command usage.
 
-**Effort**: M (~6 hours, including broadcasting logic)
+**Effort**: S (~2 hours)
 
 **Owners**: @engineer
 

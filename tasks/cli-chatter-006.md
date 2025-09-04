@@ -1,23 +1,23 @@
-# Task: cli-chatter-006 - Implement /join command
+# Task: cli-chatter-005 - Implement channel data structures
 
-**User Story**: As a user, I want to join channels using /join so I can participate in group chats.
+**User Story**: As a system, I want channels to organize chats so users can join specific topics.
 
 **Acceptance Criteria**:
-- Given connected, When I type /join #channel, Then I join the channel.
-- Given not joined, When I send message, Then it's to current channel.
-- Given invalid channel, When /join invalid, Then error message.
+- Given server, When initialized, Then default channel #general exists.
+- Given channels, When user joins, Then added to channel user list.
+- Given message sent to channel, Then broadcasted to all members.
 
 **Dependencies / Assumptions / Risks**:
-- Dependencies: Tasks 003, 005.
-- Assumptions: Channels created on join if not exist.
-- Risks: None.
+- Dependencies: Tasks 002.
+- Assumptions: In-memory storage for MVP.
+- Risks: Concurrency issues with multiple goroutines.
 
 **Test Notes & Observability Hooks**:
-- Test: Type /join, check joined.
-- Observability: Log command usage.
+- Test: Join channel, send message, check received.
+- Observability: Log channel joins.
 
-**Effort**: S (~2 hours)
+**Effort**: M (~4 hours)
 
 **Owners**: @engineer
 
-**PRD References**: #5 M
+**PRD References**: #5 M, #9

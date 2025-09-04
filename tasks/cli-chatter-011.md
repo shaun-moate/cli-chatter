@@ -1,23 +1,23 @@
-# Task: cli-chatter-011 - Add error logging to stderr
+# Task: cli-chatter-010 - Add file-based persistence for messages
 
-**User Story**: As a developer, I want errors logged to stderr so I can debug issues.
+**User Story**: As a system, I want to persist messages to file so history survives restarts.
 
 **Acceptance Criteria**:
-- Given error occurs, When in any operation, Then logged to stderr with context.
-- Given no errors, When running, Then no stderr output.
-- Given connection error, When logged, Then includes timestamp.
+- Given messages sent, When server restarts, Then history loaded from file.
+- Given file not exist, When started, Then created.
+- Given large history, When loaded, Then efficient.
 
 **Dependencies / Assumptions / Risks**:
-- Dependencies: All previous.
-- Assumptions: Use fmt.Fprintf(os.Stderr).
-- Risks: None.
+- Dependencies: Tasks 009.
+- Assumptions: JSON or simple text file.
+- Risks: File corruption.
 
 **Test Notes & Observability Hooks**:
-- Test: Cause error, check stderr.
-- Observability: This is the hook.
+- Test: Send messages, restart, check history.
+- Observability: Log persistence operations.
 
-**Effort**: S (~1 hour)
+**Effort**: M (~4 hours)
 
 **Owners**: @engineer
 
-**PRD References**: #10
+**PRD References**: #9

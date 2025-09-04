@@ -1,22 +1,22 @@
-# Task: cli-chatter-008 - Implement /msg command for private messages
+# Task: cli-chatter-007 - Implement message sending and broadcasting
 
-**User Story**: As a user, I want to send private messages using /msg so I can communicate one-on-one.
+**User Story**: As a user, I want to send messages to channels so others can see them.
 
 **Acceptance Criteria**:
-- Given connected users, When I type /msg username message, Then only that user receives it.
-- Given user offline, When /msg, Then error message.
-- Given received, When private message, Then displayed privately.
+- Given joined channel, When I type message, Then it's sent to all in channel.
+- Given message sent, When received, Then displayed with username and timestamp.
+- Given private message, When /msg user message, Then sent only to that user.
 
 **Dependencies / Assumptions / Risks**:
-- Dependencies: Tasks 004, 007.
-- Assumptions: User list maintained.
-- Risks: None.
+- Dependencies: Tasks 004, 005, 006.
+- Assumptions: Real-time via polling or goroutines.
+- Risks: Message loss if connection drops.
 
 **Test Notes & Observability Hooks**:
-- Test: Send /msg, check only recipient sees.
-- Observability: Log private messages.
+- Test: Send message, check all clients receive.
+- Observability: Log messages sent.
 
-**Effort**: S (~2 hours)
+**Effort**: M (~6 hours, including broadcasting logic)
 
 **Owners**: @engineer
 

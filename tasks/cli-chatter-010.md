@@ -1,23 +1,23 @@
-# Task: cli-chatter-010 - Add file-based persistence for messages
+# Task: cli-chatter-009 - Implement message history
 
-**User Story**: As a system, I want to persist messages to file so history survives restarts.
+**User Story**: As a user, I want to see message history when joining so I can catch up on conversations.
 
 **Acceptance Criteria**:
-- Given messages sent, When server restarts, Then history loaded from file.
-- Given file not exist, When started, Then created.
-- Given large history, When loaded, Then efficient.
+- Given channel has messages, When I join, Then last 10 messages displayed.
+- Given message sent, When stored, Then added to history.
+- Given history, When requested /history, Then shows all.
 
 **Dependencies / Assumptions / Risks**:
-- Dependencies: Tasks 009.
-- Assumptions: JSON or simple text file.
-- Risks: File corruption.
+- Dependencies: Tasks 005, 007.
+- Assumptions: In-memory for MVP.
+- Risks: Memory usage for large history.
 
 **Test Notes & Observability Hooks**:
-- Test: Send messages, restart, check history.
-- Observability: Log persistence operations.
+- Test: Join channel with history, check displayed.
+- Observability: Log history access.
 
-**Effort**: M (~4 hours)
+**Effort**: S (~2 hours)
 
 **Owners**: @engineer
 
-**PRD References**: #9
+**PRD References**: #5 S

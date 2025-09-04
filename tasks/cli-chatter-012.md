@@ -1,23 +1,23 @@
-# Task: cli-chatter-012 - Add command usage tracking
+# Task: cli-chatter-011 - Add error logging to stderr
 
-**User Story**: As a product manager, I want command usage tracked so I can measure adoption.
+**User Story**: As a developer, I want errors logged to stderr so I can debug issues.
 
 **Acceptance Criteria**:
-- Given command executed, When /join or /msg, Then usage counted.
-- Given metrics requested, When /stats, Then shows counts.
-- Given persisted, When restart, Then counts maintained.
+- Given error occurs, When in any operation, Then logged to stderr with context.
+- Given no errors, When running, Then no stderr output.
+- Given connection error, When logged, Then includes timestamp.
 
 **Dependencies / Assumptions / Risks**:
-- Dependencies: Tasks 010.
-- Assumptions: In-memory counters, persisted.
+- Dependencies: All previous.
+- Assumptions: Use fmt.Fprintf(os.Stderr).
 - Risks: None.
 
 **Test Notes & Observability Hooks**:
-- Test: Execute commands, check /stats.
-- Observability: Metrics for success metrics.
+- Test: Cause error, check stderr.
+- Observability: This is the hook.
 
-**Effort**: S (~2 hours)
+**Effort**: S (~1 hour)
 
 **Owners**: @engineer
 
-**PRD References**: #4, #10
+**PRD References**: #10

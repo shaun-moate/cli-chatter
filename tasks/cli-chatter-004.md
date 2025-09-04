@@ -1,23 +1,23 @@
-# Task: cli-chatter-004 - Implement user authentication (username)
+# Task: cli-chatter-003 - Implement client connection logic
 
-**User Story**: As a user, I want to set a username on connect so I'm identified in the chat.
+**User Story**: As a user, I want to connect to the chat server so I can participate in chats.
 
 **Acceptance Criteria**:
-- Given client connects, When prompted for username, Then enter and it's set.
-- Given username taken, When another user tries same, Then denied or allowed with suffix.
-- Given authenticated, When sending message, Then prefixed with username.
+- Given client mode with server address, When started, Then connects to the server.
+- Given connection fails, When server is down, Then shows error and exits.
+- Given connected, When I send input, Then it's forwarded to server.
 
 **Dependencies / Assumptions / Risks**:
-- Dependencies: Tasks 002, 003.
-- Assumptions: Simple username, no password.
-- Risks: Username conflicts.
+- Dependencies: Task 002.
+- Assumptions: Server running.
+- Risks: Connection timeouts.
 
 **Test Notes & Observability Hooks**:
-- Test: Connect two clients, set usernames, send messages.
-- Observability: Log username assignments.
+- Test: Start server, run client, check connection.
+- Observability: Log connection status.
 
-**Effort**: S (~2 hours)
+**Effort**: M (~4 hours)
 
 **Owners**: @engineer
 
-**PRD References**: #5 S
+**PRD References**: #5 M, #8

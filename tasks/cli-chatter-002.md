@@ -1,23 +1,23 @@
-# Task: cli-chatter-002 - Implement TCP server for handling connections
+# Task: cli-chatter-001 - Add command-line flags for server/client mode
 
-**User Story**: As a server, I want to accept TCP connections from clients so users can join the chat.
+**User Story**: As a developer, I want to run the app in server or client mode so I can set up a chat server or connect as a client.
 
 **Acceptance Criteria**:
-- Given server mode is active, When a client attempts to connect, Then the connection is accepted.
-- Given multiple clients, When they connect simultaneously, Then all are handled concurrently.
-- Given server stops, When connections are active, Then they are gracefully closed.
+- Given the app is built, When I run `go run main.go --server`, Then the app starts in server mode listening on a port.
+- Given the app is built, When I run `go run main.go --client <server_address>`, Then the app connects to the server as a client.
+- Given invalid flags, When I run the app, Then it shows usage help.
 
 **Dependencies / Assumptions / Risks**:
-- Dependencies: Go net package.
-- Assumptions: Port 8080 default.
-- Risks: Networking complexity if firewall issues.
+- Dependencies: Existing main.go structure.
+- Assumptions: Use standard Go flag package.
+- Risks: None major.
 
 **Test Notes & Observability Hooks**:
-- Test: Run server, connect with netcat or another instance.
-- Observability: Log connection events to stderr.
+- Manual test: Run with flags, check output.
+- Observability: Log mode startup to stderr.
 
-**Effort**: M (basic TCP server, ~4 hours)
+**Effort**: S (simple flag parsing, ~2 hours)
 
 **Owners**: @engineer
 
-**PRD References**: #5 M, #8, #9
+**PRD References**: #3, #8, #9

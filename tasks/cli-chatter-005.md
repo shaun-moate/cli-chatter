@@ -1,23 +1,23 @@
-# Task: cli-chatter-005 - Implement channel data structures
+# Task: cli-chatter-004 - Implement user authentication (username)
 
-**User Story**: As a system, I want channels to organize chats so users can join specific topics.
+**User Story**: As a user, I want to set a username on connect so I'm identified in the chat.
 
 **Acceptance Criteria**:
-- Given server, When initialized, Then default channel #general exists.
-- Given channels, When user joins, Then added to channel user list.
-- Given message sent to channel, Then broadcasted to all members.
+- Given client connects, When prompted for username, Then enter and it's set.
+- Given username taken, When another user tries same, Then denied or allowed with suffix.
+- Given authenticated, When sending message, Then prefixed with username.
 
 **Dependencies / Assumptions / Risks**:
-- Dependencies: Tasks 002.
-- Assumptions: In-memory storage for MVP.
-- Risks: Concurrency issues with multiple goroutines.
+- Dependencies: Tasks 002, 003.
+- Assumptions: Simple username, no password.
+- Risks: Username conflicts.
 
 **Test Notes & Observability Hooks**:
-- Test: Join channel, send message, check received.
-- Observability: Log channel joins.
+- Test: Connect two clients, set usernames, send messages.
+- Observability: Log username assignments.
 
-**Effort**: M (~4 hours)
+**Effort**: S (~2 hours)
 
 **Owners**: @engineer
 
-**PRD References**: #5 M, #9
+**PRD References**: #5 S
