@@ -1,4 +1,4 @@
-# Task: cli-chatter-005 - Implement channel data structures
+# Task: cli-chatter-006 - Implement channel data structures
 
 **User Story**: As a system, I want channels to organize chats so users can join specific topics.
 
