@@ -32,7 +32,9 @@ func main() {
 	if *serverFlag {
 		runServer()
 	} else {
-		runClient(*clientFlag)
+		if err := runClient(*clientFlag); err != nil {
+			os.Exit(1)
+		}
 	}
 }
 
@@ -115,12 +117,12 @@ func handleConnection(conn net.Conn, wg *sync.WaitGroup, ctx context.Context) {
 	}
 }
 
-func runClient(serverAddr string) {
+func runClient(serverAddr string) error {
 	fmt.Fprintf(os.Stderr, "Starting client mode, connecting to %s\n", serverAddr)
 	conn, err := net.Dial("tcp", serverAddr)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error connecting to server: %v\n", err)
-		os.Exit(1)
+		return err
 	}
 	defer conn.Close()
 
@@ -143,5 +145,7 @@ func runClient(serverAddr string) {
 	}
 	if err := scanner.Err(); err != nil {
 		fmt.Fprintf(os.Stderr, "Error reading input: %v\n", err)
+		return err
 	}
+	return nil
 }
